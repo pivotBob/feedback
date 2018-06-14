@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_feedback" default="compile.module.feedback">
+  <dirname property="module.feedback.basedir" file="${ant.file.module_feedback}"/>
+  
+  <property name="module.jdk.home.feedback" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.feedback" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.feedback" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.feedback" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="feedback.output.dir" value="${module.feedback.basedir}/out/production/feedback"/>
+  <property name="feedback.testoutput.dir" value="${module.feedback.basedir}/out/test/feedback"/>
+  
+  <path id="feedback.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="feedback.module.production.classpath">
+    <path refid="${module.jdk.classpath.feedback}"/>
+  </path>
+  
+  <path id="feedback.runtime.production.module.classpath">
+    <pathelement location="${feedback.output.dir}"/>
+  </path>
+  
+  <path id="feedback.module.classpath">
+    <path refid="${module.jdk.classpath.feedback}"/>
+    <pathelement location="${feedback.output.dir}"/>
+    <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.0.0/junit-jupiter-api-5.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/opentest4j/opentest4j/1.0.0/opentest4j-1.0.0.jar"/>
+  </path>
+  
+  <path id="feedback.runtime.module.classpath">
+    <pathelement location="${feedback.testoutput.dir}"/>
+    <pathelement location="${feedback.output.dir}"/>
+    <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.0.0/junit-jupiter-api-5.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/opentest4j/opentest4j/1.0.0/opentest4j-1.0.0.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.feedback">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.feedback">
+    <patternset refid="excluded.from.module.feedback"/>
+  </patternset>
+  
+  <path id="feedback.module.sourcepath">
+    <dirset dir="${module.feedback.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  <path id="feedback.module.test.sourcepath">
+    <dirset dir="${module.feedback.basedir}">
+      <include name="test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.feedback" depends="compile.module.feedback.production,compile.module.feedback.tests" description="Compile module feedback"/>
+  
+  <target name="compile.module.feedback.production" depends="register.custom.compilers" description="Compile module feedback; production classes">
+    <mkdir dir="${feedback.output.dir}"/>
+    <javac2 destdir="${feedback.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.feedback}/javac">
+      <compilerarg line="${compiler.args.feedback}"/>
+      <bootclasspath refid="feedback.module.bootclasspath"/>
+      <classpath refid="feedback.module.production.classpath"/>
+      <src refid="feedback.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.feedback"/>
+    </javac2>
+    
+    <copy todir="${feedback.output.dir}">
+      <fileset dir="${module.feedback.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.feedback.tests" depends="register.custom.compilers,compile.module.feedback.production" description="compile module feedback; test classes" unless="skip.tests">
+    <mkdir dir="${feedback.testoutput.dir}"/>
+    <javac2 destdir="${feedback.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.feedback}/javac">
+      <compilerarg line="${compiler.args.feedback}"/>
+      <bootclasspath refid="feedback.module.bootclasspath"/>
+      <classpath refid="feedback.module.classpath"/>
+      <src refid="feedback.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.feedback"/>
+    </javac2>
+    
+    <copy todir="${feedback.testoutput.dir}">
+      <fileset dir="${module.feedback.basedir}/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.feedback" description="cleanup module">
+    <delete dir="${feedback.output.dir}"/>
+    <delete dir="${feedback.testoutput.dir}"/>
+  </target>
+</project>
