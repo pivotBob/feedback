@@ -8,19 +8,28 @@ public class PairGeneratorImpl implements PairGenerator {
     @Override
     public Set<Pair> generatePairs(Set<TeamMember> allMembers) {
         TeamMember proposer = allMembers.stream()
-                .filter(tm -> tm.getPossibilities().get(0) != tm.getCurrentPair())
-                .findAny().orElse(null);
+            .filter(tm -> tm.getPossibilities().get(0) != tm.getCurrentPair())
+            .findAny().orElse(null);
         while (proposer != null) {
             TeamMember decider = proposer.getPossibilities().get(0);
-            if (acceptsProposal(proposer,decider)) {
+            if (acceptsProposal(proposer, decider)) {
                 accept(proposer, decider);
                 accept(decider, proposer);
             } else {
                 proposer.getPossibilities().remove(decider);
             }
             proposer = allMembers.stream()
-                    .filter(tm -> tm.getPossibilities().get(0) != tm.getCurrentPair())
-                    .findAny().orElse(null);
+                .filter(tm -> {
+                    if (tm.getPossibilities().size() > 0) {
+                        return tm.getPossibilities().get(0) != tm.getCurrentPair();
+                    } else {
+                        System.out.println(tm);
+                        System.out.println();
+                        allMembers.forEach(System.out::println);
+                        return false;
+                    }
+                })
+                .findAny().orElse(null);
         }
 
         Set<Pair> pairs = new TreeSet<>();
@@ -33,7 +42,7 @@ public class PairGeneratorImpl implements PairGenerator {
     }
 
     private void accept(TeamMember a, TeamMember b) {
-        if (a.getCurrentPair()!=null){
+        if (a.getCurrentPair() != null) {
             a.getCurrentPair().setCurrentPair(null);
             a.getCurrentPair().getPossibilities().remove(a);
         }

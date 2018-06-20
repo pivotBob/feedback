@@ -1,1 +1,190 @@
-{"members":[{"name":"Becky","active":true,"present":true},{"name":"David","active":true,"present":true},{"name":"Bob","active":true,"present":true},{"name":"Eric","active":true,"present":true},{"name":"Aaron","active":true,"present":true},{"name":"Rich","active":true,"present":true},{"name":"Dan","active":true,"present":true},{"name":"Richard","active":true,"present":true}],"history":[{"member1":{"name":"Bob","active":true,"present":true},"member2":{"name":"Eric","active":true,"present":true},"date":"2018-04-12"},{"member1":{"name":"Aaron","active":true,"present":true},"member2":{"name":"Dan","active":true,"present":true},"date":"2018-04-05"},{"member1":{"name":"Dan","active":true,"present":true},"member2":{"name":"Richard","active":true,"present":true},"date":"2018-04-12"},{"member1":{"name":"Eric","active":true,"present":true},"member2":{"name":"Becky","active":true,"present":true},"date":"2018-04-05"},{"member1":{"name":"Aaron","active":true,"present":true},"member2":{"name":"Rich","active":true,"present":true},"date":"2018-04-12"},{"member1":{"name":"Bob","active":true,"present":true},"member2":{"name":"David","active":true,"present":true},"date":"2018-04-05"},{"member1":{"name":"Becky","active":true,"present":true},"member2":{"name":"David","active":true,"present":true},"date":"2018-04-12"}]}
+{
+  "members": [
+    {
+      "name": "Bob",
+      "active": true,
+      "client": false,
+      "present": true
+    },
+    {
+      "name": "Austin",
+      "active": true,
+      "client": true,
+      "present": true
+    },
+    {
+      "name": "Rich",
+      "active": true,
+      "client": true,
+      "present": true
+    },
+    {
+      "name": "Max",
+      "active": true,
+      "client": true,
+      "present": true
+    },
+    {
+      "name": "William",
+      "active": true,
+      "client": false,
+      "present": true
+    },
+    {
+      "name": "Jay",
+      "active": true,
+      "client": false,
+      "present": true
+    },
+    {
+      "name": "Dan",
+      "active": true,
+      "client": true,
+      "present": true
+    },
+    {
+      "name": "Jeff",
+      "active": true,
+      "client": false,
+      "present": true
+    },
+    {
+      "name": "Aaron",
+      "active": true,
+      "client": true,
+      "present": true
+    }
+  ],
+  "history": [
+    {
+      "member1": {
+        "name": "Jay",
+        "active": true,
+        "present": true
+      },
+      "member2": {
+        "name": "Dan",
+        "active": true,
+        "present": true
+      },
+      "date": "2018-06-14"
+    },
+    {
+      "member1": {
+        "name": "Corner",
+        "active": true,
+        "present": true
+      },
+      "member2": {
+        "name": "William",
+        "active": true,
+        "present": true
+      },
+      "date": "2018-06-14"
+    },
+    {
+      "member1": {
+        "name": "Aaron",
+        "active": true,
+        "present": true
+      },
+      "member2": {
+        "name": "Max",
+        "active": true,
+        "present": true
+      },
+      "date": "2018-05-17"
+    },
+    {
+      "member1": {
+        "name": "Rich",
+        "active": true,
+        "present": true
+      },
+      "member2": {
+        "name": "Max",
+        "active": true,
+        "present": true
+      },
+      "date": "2018-06-14"
+    },
+    {
+      "member1": {
+        "name": "Austin",
+        "active": true,
+        "present": true
+      },
+      "member2": {
+        "name": "Jeff",
+        "active": true,
+        "present": true
+      },
+      "date": "2018-05-24"
+    },
+    {
+      "member1": {
+        "name": "Bob",
+        "active": true,
+        "present": true
+      },
+      "member2": {
+        "name": "Austin",
+        "active": true,
+        "present": true
+      },
+      "date": "2018-06-14"
+    },
+    {
+      "member1": {
+        "name": "Aaron",
+        "active": true,
+        "present": true
+      },
+      "member2": {
+        "name": "Bob",
+        "active": true,
+        "present": true
+      },
+      "date": "2018-05-24"
+    },
+    {
+      "member1": {
+        "name": "Dan",
+        "active": true,
+        "present": true
+      },
+      "member2": {
+        "name": "Jeff",
+        "active": true,
+        "present": true
+      },
+      "date": "2018-05-17"
+    },
+    {
+      "member1": {
+        "name": "Dan",
+        "active": true,
+        "present": true
+      },
+      "member2": {
+        "name": "Rich",
+        "active": true,
+        "present": true
+      },
+      "date": "2018-05-24"
+    },
+    {
+      "member1": {
+        "name": "Jeff",
+        "active": true,
+        "present": true
+      },
+      "member2": {
+        "name": "Aaron",
+        "active": true,
+        "present": true
+      },
+      "date": "2018-06-14"
+    }
+  ]
+}

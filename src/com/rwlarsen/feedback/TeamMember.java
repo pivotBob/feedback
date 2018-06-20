@@ -1,6 +1,8 @@
 package com.rwlarsen.feedback;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableBooleanValue;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -14,20 +16,24 @@ public class TeamMember implements Comparable<TeamMember> {
     private List<TeamMember> preferences;
     @JsonIgnore
     private List<TeamMember> possibilities;
-    private boolean isActive;
-    private boolean isPresent;
+    private SimpleBooleanProperty client;
+    private SimpleBooleanProperty active;
+    private SimpleBooleanProperty present;
 
     public TeamMember() {
-        this.preferences = new LinkedList<>();
-        this.possibilities = new LinkedList<>();
+        preferences = new LinkedList<>();
+        possibilities = new LinkedList<>();
+        client = new SimpleBooleanProperty();
+        active = new SimpleBooleanProperty();
+        present = new SimpleBooleanProperty();
     }
 
-    public TeamMember(String name, boolean isActive, boolean isPresent) {
+    public TeamMember(String name, boolean active, boolean present, boolean client) {
+        this();
         this.name = name;
-        this.preferences = new LinkedList<>();
-        this.possibilities = new LinkedList<>();
-        this.isActive = isActive;
-        this.isPresent = isPresent;
+        this.active.set(active);
+        this.present.set(present);
+        this.client.set(client);
     }
 
     public String getName() {
@@ -54,20 +60,44 @@ public class TeamMember implements Comparable<TeamMember> {
         return possibilities;
     }
 
+
+    @JsonIgnore
+    public ObservableBooleanValue isClientObs() {
+        return client;
+    }
+
+    public boolean isClient() {
+        return client.get();
+    }
+
+    public void setClient(boolean client) {
+        this.client.set(client);
+    }
+
+    @JsonIgnore
+    public ObservableBooleanValue isActiveObs() {
+        return active;
+    }
+
     public boolean isActive() {
-        return isActive;
+        return active.get();
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active.set(active);
+    }
+
+    @JsonIgnore
+    public ObservableBooleanValue isPresentObs() {
+        return present;
     }
 
     public boolean isPresent() {
-        return isPresent;
+        return present.get();
     }
 
     public void setPresent(boolean present) {
-        isPresent = present;
+        this.present.set(present);
     }
 
     public void setPreferences(TeamMember... prefs) {
@@ -86,7 +116,7 @@ public class TeamMember implements Comparable<TeamMember> {
         if (!(that instanceof TeamMember)) {
             return false;
         }
-        return name.equalsIgnoreCase(((TeamMember) that).name);
+        return name.equals(((TeamMember) that).name);
     }
 
     @Override
